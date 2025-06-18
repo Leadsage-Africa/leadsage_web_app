@@ -16,13 +16,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "../ui/input";
 import { formatMoneyInput, handleKeyDown, removeCommas } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import {
+	useRouter,
+	//  useSearchParams
+} from "next/navigation";
 import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { NairaIcon } from "../shared/NairaIcon";
 
 export function PricingRange() {
-	const searchParams = useSearchParams();
+	// const searchParams = useSearchParams();
 	const router = useRouter();
 
 	const [minPrice, setMinPrice] = useState("");
@@ -109,27 +112,26 @@ export function PricingRange() {
 
 	// Update URL and trigger fetch
 	useEffect(() => {
-		const params = new URLSearchParams(searchParams.toString());
+		// const params = new URLSearchParams(searchParams.toString());
 
 		if (debouncedMin) {
-			params.set("minPrice", debouncedMin);
+			// params.set("minPrice", debouncedMin);
 		} else {
-			params.delete("minPrice");
+			// params.delete("minPrice");
 		}
 
 		if (debouncedMax) {
-			params.set("maxPrice", debouncedMax);
+			// params.set("maxPrice", debouncedMax);
 		} else {
-			params.delete("maxPrice");
+			// params.delete("maxPrice");
 		}
 
 		// This updates the URL, but doesn't trigger a server fetch in app dir
 		// router.push(`?${params.toString()}`);
-		router.replace(`${window.location.pathname}?${params.toString()}`, {
-			scroll: false,
-		});
+		// router.replace(`${window.location.pathname}?${params.toString()}`, {
+		// scroll: false,
+		// });
 	}, [debouncedMin, debouncedMax]);
-
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>

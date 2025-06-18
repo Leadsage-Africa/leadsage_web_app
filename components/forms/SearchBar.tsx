@@ -2,7 +2,7 @@
 import { CircleX, Search } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Input } from "@/components/ui/input";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
@@ -17,16 +17,16 @@ export function SearchBar({
 }) {
 	const router = useRouter();
 	const pathname = usePathname();
-	const searchParams = useSearchParams();
+	// const searchParams = useSearchParams();
 
 	const inputRef = useRef<HTMLInputElement>(null); // Create ref
 
 	const [query, setQuery] = useState("");
 
-	useEffect(() => {
-		const urlQuery = searchParams.get("query") || "";
-		setQuery(urlQuery);
-	}, [searchParams]);
+	// useEffect(() => {
+	// 	const urlQuery = searchParams.get("query") || "";
+	// 	setQuery(urlQuery);
+	// }, [searchParams]);
 
 	// Autofocus input when component mounts
 	useEffect(() => {
@@ -36,17 +36,17 @@ export function SearchBar({
 	// Debounced update to URL when query changes
 	useEffect(() => {
 		const delayDebounceFn = setTimeout(() => {
-			const params = new URLSearchParams(searchParams.toString());
+			// const params = new URLSearchParams(searchParams.toString());
 
 			if (query) {
-				params.set("query", query);
+				// params.set("query", query);
 			} else {
-				params.delete("query");
+				// params.delete("query");
 			}
 
 			// Build a clean URL with pathname + query string
-			const newUrl = `${pathname}?${params.toString()}`;
-			router.push(newUrl, { scroll: false });
+			// const newUrl = `${pathname}?${params.toString()}`;
+			// router.push(newUrl, { scroll: false });
 		}, 500);
 
 		return () => clearTimeout(delayDebounceFn);
@@ -72,9 +72,8 @@ export function SearchBar({
 					className="bg-[#F7F7F7] absolute top-[50%] right-2 translate-y-[-50%]"
 					variant="ghost"
 					onClick={() => {
-						const params = new URLSearchParams(
-							searchParams.toString()
-						);
+						const params = new URLSearchParams();
+						// searchParams.toString()
 						params.delete("query");
 						// Build a clean URL with pathname + query string
 						const newUrl = `${pathname}?${params.toString()}`;
