@@ -1,0 +1,92 @@
+"use client";
+import { CircleX, Search } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { Input } from "@/components/ui/input";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+
+export function SearchBar({
+	placeholder,
+	showIcons = true,
+	onClose,
+}: {
+	placeholder: string;
+	onClose?: () => void;
+	showIcons?: boolean;
+}) {
+	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
+	const inputRef = useRef<HTMLInputElement>(null); // Create ref
+
+	const [query, setQuery] = useState("");
+
+	useEffect(() => {
+		const urlQuery = searchParams.get("query") || "";
+		setQuery(urlQuery);
+	}, [searchParams]);
+
+	// Autofocus input when component mounts
+	useEffect(() => {
+		inputRef.current?.focus();
+	}, []);
+
+	// Debounced update to URL when query changes
+	useEffect(() => {
+		const delayDebounceFn = setTimeout(() => {
+			const params = new URLSearchParams(searchParams.toString());
+
+			if (query) {
+				params.set("query", query);
+			} else {
+				params.delete("query");
+			}
+
+			// Build a clean URL with pathname + query string
+			const newUrl = `${pathname}?${params.toString()}`;
+			router.push(newUrl, { scroll: false });
+		}, 500);
+
+		return () => clearTimeout(delayDebounceFn);
+	}, [query]);
+
+	return (
+		<div className="relative w-full">
+			{showIcons && (
+				<Search className="absolute top-[50%] left-3 translate-y-[-50%] text-muted-foreground size-5" />
+			)}
+			<Input
+				ref={inputRef}
+				className={cn(
+					"rounded-full dark:border-white border-none shadow-none",
+					showIcons && "pl-8"
+				)}
+				placeholder={placeholder}
+				onChange={(e) => setQuery(e.target.value)}
+			/>
+			{showIcons && (
+				<Button
+					size="icon"
+					className="bg-[#F7F7F7] absolute top-[50%] right-2 translate-y-[-50%]"
+					variant="ghost"
+					onClick={() => {
+						const params = new URLSearchParams(
+							searchParams.toString()
+						);
+						params.delete("query");
+						// Build a clean URL with pathname + query string
+						const newUrl = `${pathname}?${params.toString()}`;
+						router.push(newUrl, { scroll: false });
+						if (typeof onClose === "function") {
+							onClose();
+						}
+					}}
+				>
+					<CircleX className="text-muted-foreground size-5" />
+				</Button>
+			)}
+		</div>
+	);
+}
