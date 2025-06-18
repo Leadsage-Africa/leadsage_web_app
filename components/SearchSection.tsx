@@ -1,3 +1,4 @@
+"use client";
 import { SearchBar } from "./forms/SearchBar";
 import { Separator } from "./ui/separator";
 import { PricingRange } from "./forms/PricingRange";
