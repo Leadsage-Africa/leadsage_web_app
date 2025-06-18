@@ -6,11 +6,11 @@ import { currentUser } from "@clerk/nextjs/server";
 
 import type { Metadata } from "next";
 import { NoCustomers } from "@/components/shared/NoCustomers";
-import { Nolistings } from "@/components/shared/Nolistings";
 import { DashboardAnalytics } from "../components/DashboardAnalytics";
 import { BookingsListings } from "../components/listings/BookingsListings";
-import { Toplistings } from "../components/Toplistings";
 import { CustomersListings } from "../components/listings/CustomersListings";
+import { Nolistings } from "@/components/shared/NoListings";
+import { Toplistings } from "../components/TopListings";
 export const metadata: Metadata = {
 	title: "Dashboard - Landlord - Leadsage",
 };
