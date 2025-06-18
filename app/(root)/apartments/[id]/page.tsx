@@ -1,5 +1,5 @@
-import { listingDetails } from "@/components/listingDetails";
-import { listingPhotos } from "@/components/listingPhotos";
+import { ListingDetails } from "@/components/ListingDetails";
+import { ListingPhotos } from "@/components/ListingPhotos";
 import { Footer } from "@/components/shared/Footer";
 import { Header } from "@/components/shared/Header";
 
@@ -15,7 +15,7 @@ const page = () => {
 					<p className="text-sm lg:text-base text-muted-foreground mt-2">
 						Like Lagos, Nigeria
 					</p>
-					<listingPhotos
+					<ListingPhotos
 						photos={[
 							{ src: "/assets/images/listing-1.jpg" },
 							{ src: "/assets/images/listing-1.jpg" },
@@ -25,7 +25,7 @@ const page = () => {
 							{ src: "/assets/images/listing-1.jpg" },
 						]}
 					/>
-					<listingDetails />
+					<ListingDetails />
 				</div>
 			</div>
 			<Footer />

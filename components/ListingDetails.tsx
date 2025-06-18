@@ -10,7 +10,7 @@ import { NairaIcon } from "./shared/NairaIcon";
 
 interface Props {}
 
-export const listingDetails = () => {
+export const ListingDetails = () => {
 	const [booking, setBooking] = useState("");
 
 	return (

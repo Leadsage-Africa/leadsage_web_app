@@ -8,7 +8,7 @@ import { DEFAULT_LISTING_IMAGE } from "@/constants";
 import { Button } from "./ui/button";
 import { ShowAllPhotosModal } from "./ShowAllPhotosModal";
 
-export const listingPhotos = ({ photos = [] }: { photos?: any }) => {
+export const ListingPhotos = ({ photos = [] }: { photos?: any }) => {
 	const [open, setOpen] = useState(false);
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [openAllPhotosModal, setOpenAllPhotosModal] = useState(false);
