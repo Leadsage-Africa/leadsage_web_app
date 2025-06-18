@@ -1,2 +1,2 @@
-import "../models/space.model";
+import "../models/listing.model";
 import "../models/user.model";
